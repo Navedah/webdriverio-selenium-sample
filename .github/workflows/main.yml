@@ -1,34 +1,42 @@
-name: webdriver Test
+name: Selenium Tests
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main  # Trigger the workflow on pushes to the 'main' branch
 
 jobs:
-  build:
-    runs-on: windows-latest
+  selenium_tests:
+    name: Selenium Tests Job
+    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-        
+
     env:
-      LT_USERNAME: "naveda"  # Set your desired environment variable here
+      LT_USERNAME: "naveda"
       LT_ACCESS_KEY: "Y38l1pghEBmUKFqfk5XZSPrwP9Tc2cU8eWNaBPZjRYpXhYerxb"
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: |
-          npm install selenium-webdriver 
-          npm install webdriverio
-          npm i
-          npm install
-          npm i wdio-lambdatest-service --save-dev
-          npm run single
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Display Node.js version
+        run: node -v
+
+    
+
+      - name: Install Selenium Webdriver
+        run: npm install selenium-webdriver
+
+      - name: Install WebdriverIO
+        run: npm install webdriverio
+
+      - name: run test
+        run: npm sun single
