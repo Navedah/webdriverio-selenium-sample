@@ -39,4 +39,4 @@ jobs:
         run: npm install webdriverio
 
       - name: run test
-        run: npm sun single
+        run: npm run single
