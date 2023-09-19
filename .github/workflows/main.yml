@@ -1,3 +1,5 @@
+name: webdriver Test
+
 on:
   push:
     branches: [ "master" ]
